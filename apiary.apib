@@ -1,0 +1,104 @@
+FORMAT: 1A
+HOST: http://polls.apiblueprint.org/
+
+# ygeorge
+
+This is an test API allowing users to view posts and make them.
+
+## Group Auth
+## Login [/login]
+
+### Sign In [POST]
+
++ Request (application/json)
+
+        {
+            "login": "username",
+            "pass": "password"
+        }
+    
++ Response 200 (application/json)
+
+        {
+            "id": "0",
+            "token": "1q2w3e4r5t6y7u"
+        }
+        
++ Response 400 (application/json)
+
+        {
+            "error": "Wrong login or password"
+        }
+
+## Group Posts
+## Posts [/posts]
+
+### Create a New Post [POST]
+
+You may create your own post using this action.
+    
++ title (string) - Title of the new post
++ message (string) - Body of the new post
++ Request (application/json)
+
+        {
+            "title": "Check out my new API design doc!",
+            "message": "Hey guys! I'm trying to understand abilites of apiary." +
+            "It looks awesome at first sight."
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /questions/42
+
+    + Body
+
+            {
+                "id": 42,
+                "published_at": "2017-08-05T08:40:51.620Z",
+            }
+
+### Get all posts [GET]
+
+Use this methods to get all posts in the system.
+
++ Request (application/json)
+
+        {
+            "title": "Check out my new API design doc!",
+            "message": "Hey guys! I'm trying to understand abilites of apiary. It looks awesome at first sight"
+        }
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 41,
+                "title": "Test",
+                "message":"Short message for test."
+            },
+            {
+                "id": 42,
+                "title": "Check out my new API design doc!",
+                "message":"Hey guys! I'm trying to understand abilites of apiary. It looks awesome at first sight."
+            }
+        ]
+        
+## Post [/posts/{id}]
+
+### Get a post [GET]
+
+Use this methods to get all posts in the system.
++ Parameters
+    + id (number) - ID of the Post in the form of an integer
+
++ Response 200 (application/json)
+
+
+        {
+            "id": 42,
+            "title": "Check out my new API design doc!",
+            "message":"Hey guys! I'm trying to understand abilites of apiary. It looks awesome at first sight."
+        }
